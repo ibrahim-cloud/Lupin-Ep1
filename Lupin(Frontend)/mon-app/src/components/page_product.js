@@ -46,7 +46,7 @@ export default class AddProduct extends Component {
 
                 <div className="form-group">
                     <label>Image</label>
-                    <input type="file" className="form-control" placeholder="Image"  onChange={e=> this.image= e.target.value} />
+                    <input type="file" className="form-control" placeholder="Image"  onChange={e=> this.image= e.target.files[0].name} />
                 </div>
 
                 <div className="form-group">

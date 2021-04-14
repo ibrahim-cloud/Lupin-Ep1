@@ -14,6 +14,8 @@ export default class Login extends Component {
                 if (!res.data.User.first_login  ){                    
                         window.location.assign("http://localhost:3000/pass")
                         localStorage.setItem('id',res.data.User._id);
+                        localStorage.setItem('is_vendeur',res.data.User.is_vendeur );
+
                         // console.log()
                        
 
@@ -23,8 +25,10 @@ export default class Login extends Component {
                      console.log(res.data.token +'de')
                          localStorage.setItem('token',res.data.token);
                          localStorage.setItem('id',res.data.User._id);
+                         localStorage.setItem('is_vendeur',res.data.User.is_vendeur );
 
-                    window.location.assign("http://localhost:3000/AddProduct")
+
+                    window.location.assign("http://localhost:3000/choixUser")
 
                 }
                

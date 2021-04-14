@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import jwt from 'jwt-decode'
 
 
 export default class dashboardVendeur extends Component {
@@ -29,11 +30,15 @@ export default class dashboardVendeur extends Component {
    
     render() {
         const { Users, errorMsg } = this.state;
-
+        const token = localStorage.getItem('token')
+        const is_vendeur = jwt(token).is_vendeur
         
         return (
+            <>
+
+            {is_vendeur ? (
             <div className="auth-wrapper"> 
-        
+
             <div className="auth-inner1">
             <div id="layoutSidenav_content"> 
             <main>
@@ -49,7 +54,8 @@ export default class dashboardVendeur extends Component {
                         <div className="card-body">
                             <div className="table-responsive">
                                 <div className="table-wrapper-scroll-y my-custom-scrollbar">
-                                 
+                                <a href="http://localhost:3000/choixUser">return</a>
+
                                 <table  className="table table-bordered" id="doctors" width="100%" >
                                 <thead>
     <tr>
@@ -92,6 +98,14 @@ export default class dashboardVendeur extends Component {
              </div>
              </div>
              </div>
+             ) : (
+                <div>
+            <div className="pop"></div>
+                
+            <h1  style={{textAlign: 'Center'},{marginLeft:'773px'}}>Error 403</h1>
+                </div>
+            )}
+            </>
         );
     }
 }

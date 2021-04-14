@@ -15,13 +15,14 @@ import AddAdmin from "./components/addAdmin";
 import product from "./components/page_product";
 import DashProduit from "./components/dashboardVendeur";
 import AllProduit from "./components/allproduit";
-import SingleProduit from "./components/singleProduct";
+import singleProduct from "./components/singleProduct";
 import Order from "./components/Order";
-import test2 from "./components/test2";
-import test from "./components/test";
-
+import PrivateRoute from "./auth/PrivateRoute"
+import SuperAdminRoute from "./auth/SuperAdminRoute"
 import ValidOrder from "./components/valid_order";
+import choixUser from "./components/ChoixUser";
 
+import choixVendeur from "./components/ChoixVendeur";
 
 
 // import validationUser from "./components/validationUser";
@@ -36,6 +37,7 @@ function App() {
           <Link className="navbar-brand" to={"/"}>Lupin</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
+          
          
               <li className="nav-item">
                 <Link className="nav-link" to={"/"} onClick={()=> localStorage.clear()} > log out</Link>
@@ -56,14 +58,14 @@ function App() {
        <Route path="/AddProduct" component={product} />
        <Route path="/dashvendeur" component={DashProduit} />
        <Route path="/All" component={AllProduit} />
-       <Route path="/single/:id" component={SingleProduit} />
+       <Route path="/single/:id" component={singleProduct} />
        <Route path="/Order" component={Order} />
+       <Route path="/choixVendeur" component={choixVendeur} />
 
-       <Route path="/test" component={test} />
+       <Route path="/choixUser" component={choixUser} />
        
        <Route path="/ValidOrder" component={ValidOrder} />
 
-       <Route path="/test2" component={test2} />
 
           <Route path="/AddAdmin" component={AddAdmin} />
             <Route path="/AdminLogin" component={AdminLogin} />

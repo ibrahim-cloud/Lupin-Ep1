@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import jwt from 'jwt-decode'
 
 import '../App.css';
 
@@ -31,6 +32,9 @@ export default class ValidUser extends Component {
 	}
    
     render() {
+    const token = localStorage.getItem('token')
+            const is_admin = jwt(token).is_admin
+
          const { Users, errorMsg } = this.state;
          function update(id) {
             const config ={
@@ -56,10 +60,14 @@ export default class ValidUser extends Component {
                     console.log(err);
                 }
             )
-           
+        
             
         }
         return (
+
+           
+            <>
+            {is_admin ? (
             <div className="auth-wrapper"> 
         
             <div className="auth-inner1">
@@ -126,6 +134,16 @@ Users.map(User =>  <tr key={User._id}>
              </div>
              </div>
              </div>
+
+
+) : (
+    <div>
+<div className="pop"></div>
+    
+<h1  style={{textAlign: 'Center'},{marginLeft:'773px'}}>Error 403</h1>
+    </div>
+)}
+</>
         );
     }
 }

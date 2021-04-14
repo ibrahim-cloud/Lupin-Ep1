@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
+import jwt from 'jwt-decode'
 
 
 
 export default class AddAdmin extends Component {
+   
     handleSubmit=e=>{
+
+       
         e.preventDefault();
 
         const config ={
@@ -34,8 +38,15 @@ export default class AddAdmin extends Component {
         console.log(data)
     }
     render() {
+
+
+        const token = localStorage.getItem('token')
+        const is_super_admin = jwt(token).is_super_admin
+
         
         return (
+            <>
+            {is_super_admin ? (
             <div className="auth-wrapper"> 
         
             <div className="auth-inner">
@@ -67,6 +78,15 @@ export default class AddAdmin extends Component {
                      <a href="./choixGadmin">return</a>
                 </p>
             </form></div></div>
+
+            ) : (
+                <div>
+            <div className="pop"></div>
+                
+            <h1  style={{textAlign: 'Center'},{marginLeft:'773px'}}>Error 403</h1>
+                </div>
+            )}
+            </>
         );
     }
 }

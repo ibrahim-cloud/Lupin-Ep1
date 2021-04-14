@@ -3,8 +3,7 @@ const jwt = require('jsonwebtoken')
 const User = require('./userModels')
 const ProductSchema = mongoose.Schema({
     image: {
-        data: Buffer, 
-        contentType: String 
+        type: String
     },
     type:{
         type:String,

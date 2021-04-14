@@ -11,7 +11,7 @@ export default class Login extends Component {
         .then(
             res=> {
                
-                window.location.assign("http://localhost:3000/AddProduct")
+                window.location.assign("http://localhost:3000/choixUser")
 
                 
             }

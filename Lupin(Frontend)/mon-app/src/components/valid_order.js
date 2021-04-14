@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import jwt from 'jwt-decode'
 
 import '../App.css';
 
@@ -19,6 +20,10 @@ export default class ValidUser extends Component {
     }
 
 	componentDidMount() {
+        // if(!localStorage.getItem('token')){
+        //     window.location.assign("http://localhost:3000/")
+
+        // }else{
 
         
         axios.get("http://localhost:2029/admin/order")
@@ -42,6 +47,10 @@ export default class ValidUser extends Component {
 	}
    
     render() {
+        const token = localStorage.getItem('token')
+        const is_admin = jwt(token).is_admin
+
+        
          const { order, errorMsg } = this.state;
          function update(id,id_vendeur,price) {
             const config ={
@@ -77,7 +86,11 @@ export default class ValidUser extends Component {
                  
              }
             axios.patch("http://localhost:2029/admin/Validorder/"+id,data,config)
-            .then(res=> {console.log(res)}
+            .then(res=> {console.log(res)
+                window.location.assign("http://localhost:3000/ValidOrder")
+
+            
+            }
             )  
             .catch(
                 err=>{console.log(err); }
@@ -86,6 +99,10 @@ export default class ValidUser extends Component {
             
         }
         return (
+
+             
+            <>
+            {is_admin ? (
             <div className="auth-wrapper"> 
         
             <div className="auth-inner1">
@@ -108,7 +125,6 @@ export default class ValidUser extends Component {
                                 <thead>
     <tr>
       <th scope="col">Id product</th>
-      <th scope="col">Adresse</th>
      
       <th scope="col">Valid Order</th>
     </tr>
@@ -123,7 +139,6 @@ export default class ValidUser extends Component {
 
 order.map(order =>  <tr key={order._id}>
 
-<td>{order.id_product}</td>
 <td>{order.id_product}</td>
       <td>{order.id_vendeur}</td>
         <td><button onClick ={ ()=> update(order._id,order.id_vendeur,order.Price)} type="submit" className="btn btn-primary btn-block">Valid Order</button>
@@ -147,6 +162,16 @@ order.map(order =>  <tr key={order._id}>
              </div>
              </div>
              </div>
+
+
+) : (
+    <div>
+<div className="pop"></div>
+    
+       <h1  style={{textAlign: 'Center'},{marginLeft:'773px'}}>Error 403</h1>
+    </div>
+)}
+</>
         );
     }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import {Link } from "react-router-dom";
+import { Image } from 'react-bootstrap';
 
 
 
@@ -33,12 +34,11 @@ export default class AllProduit extends Component {
         const { produits, errorMsg } = this.state;
 
         return (
-          
-
-
+          <>
             <div className="container">
 
             <div className="pop"></div>
+            <a href='http://localhost:3000/choixUser'>return</a>
             <div className="row">
            {produits.length ?
            
@@ -54,8 +54,8 @@ export default class AllProduit extends Component {
                    <article className="card-wrapper">
                      <div className="image-holder">
                        <a href="#" className="image-holder__link" />
-                       <div className="image-liquid image-holder--original" style={{backgroundImage: 'url("http://www.publicdomainpictures.net/pictures/20000/nahled/red-shoes-isolated.jpg")'}}>
-                       </div>
+                       <div className="image-liquid image-holder--original">
+                       <Image src={'/image/'+ $produit.image} alt="bg image"  fluid />                       </div>
                      </div>
                      <div className="product-description">
                        {/* title */}
@@ -102,6 +102,11 @@ export default class AllProduit extends Component {
              </div>
            
 
+	
+
+
+           
+</>
 	
 
 

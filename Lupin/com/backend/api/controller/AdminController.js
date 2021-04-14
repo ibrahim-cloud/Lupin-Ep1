@@ -31,12 +31,12 @@ const SuperAdminLogin = async (req,res)=>{
         if (admin) {
             var token = null
             if (admin.is_super_admin) {
-                token = jwt.sign({ _id: admin._id   , is_super_admin: admin.is_super_admin }, 'secretkey')
+                token = jwt.sign({ _id: admin._id   , is_super_admin: admin.is_super_admin }, 'SuperAdminToken')
                 console.log('super admin');
                 console.log(admin.is_super_admin)
             }
             else {
-                token = jwt.sign({ _id: admin._id    , is_admin: admin.is_admin }, 'secretkey' )
+                token = jwt.sign({ _id: admin._id    , is_admin: admin.is_admin }, 'TokenAdmin' )
                 console.log('admin');
             }
             res.send({ admin: admin, token: token })
@@ -87,7 +87,7 @@ const getuser = async (req,res) =>{
     secure: false, // true for 465, false for other ports
     auth: {
         user: 'himi66447@gmail.com', // generated ethereal user
-        pass: ''  // generated ethereal password
+        pass: 'IbrahiME'  // generated ethereal password
     },
     tls:{
       rejectUnauthorized:false
@@ -142,15 +142,27 @@ const ValidOrder = (req,res) =>{
 }
 //put Revune for Buyer
 const PutRevenu = (req,res) =>{
-  User.findById(req.params.id)
-
-.then((User)=>{
-  User.revenu = User.revenu + req.body.revenu
-  User
+ const user = User.findById(req.params.id)
+.then((user)=>{
+  user.revenu = user.revenu + req.body.revenu
+  user
     .save()
     .then(() => res.json("User successfully updated"  ))
 
+
+ if( user.revenu > 30000 && user.revenu < 50000){
+
+  user.type_account = "pro"
+  user
+  .save()
+ } 
+if(user.revenu > 50000){
+  user.type_account = "expert "
+  user
+  .save()
+}
   })
+
 
 }
 

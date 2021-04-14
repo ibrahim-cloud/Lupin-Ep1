@@ -12,6 +12,10 @@ export default class LoginAdmin extends Component {
             res=> {
                 console.log(res.data.token)
                 localStorage.setItem('token',res.data.token);
+                localStorage.setItem('is_admin',res.data.admin.is_admin);
+                localStorage.setItem('is_super_admin',res.data.admin.is_super_admin);
+
+
                 
                 setTimeout(function(){window.location.assign("http://localhost:3000/Gadmin");  }, 3000);
 

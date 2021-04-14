@@ -12,8 +12,8 @@ const auth = require('../middleware/auth')
 router.route("/signup").post(signupController.AddUser) ;
 router.route("/login").post(signupController.UserLogin) ;
 router.route("/valid/:id").put(signupController.updatePassword) ;
-router.post("/AddProduct",[auth,vendeur],signupController.AddProduct) ;
-router.get("/numberProduit/:id",[auth,vendeur],dashboardMini.getNumberPost)
+router.post("/AddProduct",signupController.AddProduct) ;
+router.get("/numberProduit/:id",dashboardMini.getNumberPost)
 router.get("/:id",signupController.getUserById)
 
 
